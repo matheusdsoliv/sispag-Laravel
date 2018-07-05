@@ -33,15 +33,7 @@ class FormularioPagamentoController extends Controller
     Session::put('_session_inss', calc_inss( session('_session_salario_bruto')));
     Session::put('_session_salario_liquido', calc_sal_liq(session('_session_salario_bruto'), session('_session_inss')) ); 
 
-    // require("ApresentaçãoCupomSalarial.php");
-
     // PASSO 3
-    // EXIBIR OS DADOS - PARA TESTE
-    // imprime($_idade, $_abono, $_salario_familia, $_salario_bruto, $_inss, $_salario_liquido);
-    // print_r($_SESSION);
-    // exit;
-
-    // PASSO 4
     // REDIRECIONAR À PÁGINA DE APRESENTAÇÃO DO CUMPOM FISCAL
     return view('ApresentacaoCumpomSalarialView');
     }
