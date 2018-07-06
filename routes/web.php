@@ -11,8 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('FormularioPagamentoView');
-});
-
-Route::post('/FormularioPagamentoView', 'FormularioPagamentoController@index')->name('rota_capta_form');
+Route::get('/', 'FormularioPagamentoController@index')->name('index');
+Route::post('/FormularioPagamentoView', 'FormularioPagamentoController@store')->name('rota_capta_form');

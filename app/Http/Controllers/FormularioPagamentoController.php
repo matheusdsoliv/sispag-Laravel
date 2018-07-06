@@ -4,38 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Session;
+use App\FolhaPagamento;
 
 class FormularioPagamentoController extends Controller
 {
     public function index(){    
-
-    //PASSO 1
-    // Recebendo dados do formulário
-    $_dados = array(
-         'cpf' => $_POST['cpf'],
-         'funcionario' => $_POST['funcionario'],
-         'ano_nascimento' => $_POST['ano_nascimento'],
-         'salario_base' => $_POST['salario_base'],
-         'qtd_filhos' => $_POST['qtd_filhos']
-    );
-
-    // PASSO 2
-    // PROCESSAMENTO DOS DADOS
-    Session::put('_session_funcionario', $_dados['funcionario']);
-    Session::put('_session_idade', calc_idade($_dados['ano_nascimento']) );
-    Session::put('_session_cpf', $_dados['cpf']);
-    Session::put('_session_salario_base', $_dados['salario_base']);
-    Session::put('_session_qtd_filhos', $_dados['qtd_filhos']);
-    Session::put('_session_abono', calc_abono( session('_session_idade') ) );
-    Session::put('_session_salario_familia', calc_sal_familia($_dados['qtd_filhos']));
-    Session::put('_session_salario_bruto', $_dados['salario_base'] + calc_sal_familia( $_dados['qtd_filhos'] ) + calc_abono( session('_session_idade') ) );
-    Session::put('_session_inss', calc_inss( session('_session_salario_bruto')));
-    Session::put('_session_salario_liquido', calc_sal_liq(session('_session_salario_bruto'), session('_session_inss')) ); 
-
-    // PASSO 3
-    // REDIRECIONAR À PÁGINA DE APRESENTAÇÃO DO CUMPOM FISCAL
-    return view('ApresentacaoCumpomSalarialView');
+        
+        return view('FormularioPagamentoView');
     }
+    
+    public function store(Request $request){
+        
+        $_FolhaPagamento = new FolhaPagamento();
+        
+        $_funcionario = $request->funcionario;
+        $_cpf = $request->cpf;
+        $_salario_base = $request->salario_base;
+        $_qtd_filhos = $request->qtd_filhos;
+
+        $_idade = $_FolhaPagamento->calcularIdade($request->ano_nascimento);
+        $_abono = $_FolhaPagamento->calcularAbono($_idade);
+        $_salario_familia = $_FolhaPagamento->calcularSalarioFamilia($_qtd_filhos);
+        $_salario_bruto = $_salario_base + $_salario_familia + $_abono;
+        $_inss = $_FolhaPagamento->calcularInss($_salario_bruto);
+        $_salario_liquido = $_FolhaPagamento->calcularSalarioLiquido($_salario_bruto, $_inss);
+        
+        $this->showCupomSalarial();
+    }
+    
+    public function showCupomSalarial(){
+        return view('ApresentacaoCumpomSalarialView', compact('_funcionario','_cpf','_salario_base','_qtd_filhos','_idade','_abono','_salario_familia','_salario_bruto','_inss','_salario_liquido'));
+    }
+    
 }
 ?>

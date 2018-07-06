@@ -24,52 +24,52 @@
 
                     <tr>
                         <th scope="row">Funcionário</th>
-                        <td> {{session('_session_funcionario')}} </td>
+                        <td> {{$_funcionario}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Idade</th>
-                        <td> {{session('_session_idade')}} </td>
+                        <td> {{$_idade}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Quantidade de filhos</th>
-                        <td> {{session('_session_qtd_filhos')}} </td>
+                        <td> {{$_qtd_filhos}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">CPF</th>
-                        <td> {{session('_session_cpf')}} </td>
+                        <td> {{$_cpf}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Salário Base</th>
-                        <td> {{session('_session_salario_base')}} </td>
+                        <td> {{$_salario_base}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Salário Família</th>
-                        <td> {{session('_session_salario_familia')}} </td>
+                        <td> {{$_salario_familia}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Abono</th>
-                        <td> {{session('_session_abono')}} </td>
+                        <td> {{$_abono}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Salário Bruto</th>
-                        <td> {{session('_session_salario_bruto')}} </td>
+                        <td> {{$_salario_bruto}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">INSS</th>
-                        <td> {{session('_session_inss')}} </td>
+                        <td> {{$_inss}} </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Salário Líquido</th>
-                        <td> {{session('_session_salario_liquido')}} </td>
+                        <td> {{$_salario_liquido}} </td>
                     </tr>
 
                 </tbody>
