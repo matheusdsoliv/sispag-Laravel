@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\FolhaPagamento;
 
+
 class FormularioPagamentoController extends Controller
 {
     public function index(){    
@@ -29,11 +30,8 @@ class FormularioPagamentoController extends Controller
         $_inss = $_FolhaPagamento->calcularInss($_salario_bruto);
         $_salario_liquido = $_FolhaPagamento->calcularSalarioLiquido($_salario_bruto, $_inss);
         
-        $this->showCupomSalarial();
-    }
-    
-    public function showCupomSalarial(){
-        return view('ApresentacaoCumpomSalarialView', compact('_funcionario','_cpf','_salario_base','_qtd_filhos','_idade','_abono','_salario_familia','_salario_bruto','_inss','_salario_liquido'));
+        return view('ApresentacaoCupomSalarialView', compact('_funcionario','_cpf','_salario_base','_qtd_filhos','_idade','_abono','_salario_familia','_salario_bruto','_inss','_salario_liquido'));
+
     }
     
 }
